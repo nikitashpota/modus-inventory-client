@@ -1,12 +1,12 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import QRCode from "react-qr-code";
-import { URL } from "../../config";
+import { CLIENT_URL } from "../../config";
 
 const CardPrint = ({ props }) => {
   const number = props.number;
   const id = props.id;
-  const link = `${URL}/print/${id}`;
+  const link = `${CLIENT_URL}/print/${id}`;
 
   return (
     <Card>

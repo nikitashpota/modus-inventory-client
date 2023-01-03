@@ -4,14 +4,14 @@ import Button from "react-bootstrap/Button";
 import QRCode from "react-qr-code";
 import Axios from "axios";
 import ModalWindow from "../ModalWindow/ModalWindow";
-import { API_URL, URL } from "../../config";
+import { API_URL, CLIENT_URL } from "../../config";
 
 const CardObject = ({ props }) => {
   const number = props.number;
   const description = props.description;
   const owner = props.owner;
   const id = props.id;
-  const link = `${URL}/print/${id}`;
+  const link = `${CLIENT_URL}/print/${id}`;
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);

@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
 import QRCode from "react-qr-code";
-import { API_URL, URL } from "../../config";
+import { API_URL, CLIENT_URL } from "../../config";
 
 const Object = () => {
   const { id } = useParams();
   const [object, setObject] = useState([]);
-  const link = `${URL}/print/${object.id}`;
+  const link = `${CLIENT_URL}/print/${object.id}`;
 
   useEffect(() => {
     Axios.get(`${API_URL}/api/get`).then((response) => {
