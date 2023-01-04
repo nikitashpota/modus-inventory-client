@@ -39,16 +39,16 @@ const AllObjects = () => {
   if (descriptionList.length > 0) {
     return (
       <>
-        <div className="filter">
-          <Form.Select
-            className="mb-3 w-75"
-            onChange={handleChangeFilter}
-          >
-            <option>Всё...</option>
-            <option>Компьютеры и оборудование</option>
-            <option>Мебель</option>
-            <option>Другое</option>
-          </Form.Select>
+        <div style={{ paddingLeft: "12px", paddingRight: "12px" }}>
+          <Form.Group>
+            <Form.Text>Categories:</Form.Text>
+            <Form.Select className="mb-3" onChange={handleChangeFilter}>
+              <option>Всё...</option>
+              <option>Компьютеры и оборудование</option>
+              <option>Мебель</option>
+              <option>Другое</option>
+            </Form.Select>
+          </Form.Group>
         </div>
 
         <div
