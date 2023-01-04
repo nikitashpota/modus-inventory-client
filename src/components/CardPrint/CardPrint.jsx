@@ -10,7 +10,14 @@ const CardPrint = ({ props }) => {
 
   return (
     <Card>
-      <Card.Body>
+      <Card.Body
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <QRCode value={link} size={126} style={{ marginBottom: "1rem" }} />
         <Card.Title style={{ textAlign: "center" }}>{number}</Card.Title>
       </Card.Body>
