@@ -10,11 +10,13 @@ const ModalWindow = ({ show, handleClose, props }) => {
   const description = props.description;
   const owner = props.owner;
   const id = props.id;
+  const category = props.category;
 
   const [inputs, setInputs] = useState({
     number: number,
     description: description,
     owner: owner,
+    category: category,
   });
 
   const handleChange = (e) => {
@@ -30,6 +32,7 @@ const ModalWindow = ({ show, handleClose, props }) => {
       number: inputs.number,
       description: inputs.description,
       owner: inputs.owner,
+      category: inputs.category,
     });
   };
 
@@ -51,6 +54,19 @@ const ModalWindow = ({ show, handleClose, props }) => {
               onChange={handleChange}
               autoFocus
             />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label htmlFor="disabledSelect">Categories</Form.Label>
+            <Form.Select
+              onChange={handleChange}
+              name="category"
+              id="disabledSelect"
+              value={inputs.category}
+            >
+              <option>Компьютеры и оборудование</option>
+              <option>Мебель</option>
+              <option>Другое</option>
+            </Form.Select>
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
             <Form.Label>Description</Form.Label>

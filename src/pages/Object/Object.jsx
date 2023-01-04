@@ -21,11 +21,13 @@ const Object = () => {
         <QRCode value={link} size={128} className="mb-3"/>
         <h3>ID</h3>
         <p>{object.id}</p>
-        <h3>Number</h3>
+        <h3>Number:</h3>
         <p>{object.number}</p>
-        <h3>Description</h3>
+        <h3>Category:</h3>
+        <p>{object.category}</p>
+        <h3>Description:</h3>
         <p>{object.description}</p>
-        <h3>Owner</h3>
+        <h3>Owner:</h3>
         <p>{object.owner}</p>
       </div>
     );

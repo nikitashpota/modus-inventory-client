@@ -1,0 +1,13 @@
+.filter {
+    display: flex;
+    justify-content: center;
+}
+
+.filter__input{
+    width: 300px;
+    
+}
+
+@media screen and (max-width: 400px) {
+
+}

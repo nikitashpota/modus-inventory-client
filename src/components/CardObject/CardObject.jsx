@@ -11,6 +11,7 @@ const CardObject = ({ props }) => {
   const description = props.description;
   const owner = props.owner;
   const id = props.id;
+  const category = props.category;
   const link = `${CLIENT_URL}/print/${id}`;
 
   const [show, setShow] = useState(false);
@@ -25,9 +26,12 @@ const CardObject = ({ props }) => {
     <Card style={{ width: "18rem" }}>
       <Card.Body>
         <QRCode value={link} size={126} style={{ marginBottom: "1rem" }} />
-        <Card.Title>{number}</Card.Title>
+        <Card.Text>{number}</Card.Text>
+        <Card.Title>Category:</Card.Title>
+        <Card.Text>{category}</Card.Text>
+        <Card.Title>Description:</Card.Title>
         <Card.Text>{description}</Card.Text>
-        <Card.Title>Owner</Card.Title>
+        <Card.Title>Owner:</Card.Title>
         <Card.Text>{owner}</Card.Text>
         <div
           style={{

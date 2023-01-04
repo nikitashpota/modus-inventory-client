@@ -5,12 +5,14 @@ import Axios from "axios";
 import { API_URL } from "../../config";
 
 const SendForm = () => {
-  const [inputs, setInputs] = useState({});
+  const [inputs, setInputs] = useState({category: "Компьютеры и оборудование"});
 
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setInputs((values) => ({ ...values, [name]: value }));
+
+    console.log({ [e.target.name]: value });
   };
 
   const handleSubmit = (e) => {
@@ -19,10 +21,13 @@ const SendForm = () => {
       number: inputs.number,
       description: inputs.description,
       owner: inputs.owner,
+      category: inputs.category,
     });
     e.target.number.value = "";
     e.target.description.value = "";
     e.target.owner.value = "";
+
+    console.log(inputs.category);
   };
 
   return (
@@ -36,6 +41,19 @@ const SendForm = () => {
           value={inputs.number || ""}
           onChange={handleChange}
         />
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="disabledSelect">Categories</Form.Label>
+        <Form.Select
+          onChange={handleChange}
+          name="category"
+          id="disabledSelect"
+          value={inputs.category || "Компьютеры и оборудование"}
+        >
+          <option>Компьютеры и оборудование</option>
+          <option>Мебель</option>
+          <option>Другое</option>
+        </Form.Select>
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicDescription">
         <Form.Label>Description</Form.Label>
