@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import QRCode from "react-qr-code";
 import Axios from "axios";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import { API_URL, CLIENT_URL } from "../../config";
@@ -12,6 +11,7 @@ const CardObject = ({ props }) => {
   const owner = props.owner;
   const id = props.id;
   const category = props.category;
+  const file_src = props.file_src;
   const link = `${CLIENT_URL}/print/${id}`;
 
   const [show, setShow] = useState(false);
@@ -25,7 +25,7 @@ const CardObject = ({ props }) => {
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Body>
-        <QRCode value={link} size={126} style={{ marginBottom: "1rem" }} />
+        <Card.Img className="mb-3" variant="top" src={file_src} />
         <Card.Text>{number}</Card.Text>
         <Card.Title>Category:</Card.Title>
         <Card.Text>{category}</Card.Text>

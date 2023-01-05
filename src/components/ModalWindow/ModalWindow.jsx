@@ -19,6 +19,13 @@ const ModalWindow = ({ show, handleClose, props }) => {
     category: category,
   });
 
+  const [image, setImage] = useState({});
+
+  const handleImage = (e) => {
+    const file = e.target.files[0];
+    setImage((values) => ({ ...values, file: file, name: file.name }));
+  };
+
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -27,13 +34,16 @@ const ModalWindow = ({ show, handleClose, props }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    Axios.put(`${API_URL}/api/update`, {
-      id: id,
-      number: inputs.number,
-      description: inputs.description,
-      owner: inputs.owner,
-      category: inputs.category,
-    });
+
+    const formData = new FormData();
+    formData.append("image", image.file);
+    formData.append("owner", inputs.owner);
+    formData.append("description", inputs.description);
+    formData.append("number", inputs.number);
+    formData.append("category", inputs.category);
+    formData.append("id", id);
+
+    Axios.put(`${API_URL}/api/update`, formData);
   };
 
   return (
@@ -86,6 +96,15 @@ const ModalWindow = ({ show, handleClose, props }) => {
               placeholder="owner"
               value={inputs.owner || ""}
               onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Upload image</Form.Label>
+            <Form.Control
+              onChange={handleImage}
+              type="file"
+              name="image"
+              accept="image/png, image/gif, image/jpeg"
             />
           </Form.Group>
         </Modal.Body>

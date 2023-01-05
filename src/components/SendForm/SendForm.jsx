@@ -5,7 +5,10 @@ import Axios from "axios";
 import { API_URL } from "../../config";
 
 const SendForm = () => {
-  const [inputs, setInputs] = useState({category: "Компьютеры и оборудование"});
+  const [inputs, setInputs] = useState({
+    category: "Компьютеры и оборудование",
+  });
+  const [image, setImage] = useState({});
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -15,19 +18,26 @@ const SendForm = () => {
     console.log({ [e.target.name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    Axios.post(`${API_URL}/api/insert`, {
-      number: inputs.number,
-      description: inputs.description,
-      owner: inputs.owner,
-      category: inputs.category,
-    });
+
+    const formData = new FormData();
+    formData.append("image", image.file);
+    formData.append("owner", inputs.owner);
+    formData.append("description", inputs.description);
+    formData.append("category", inputs.category);
+    formData.append("number", inputs.number);
+
+    await Axios.post(`${API_URL}/api/insert`, formData);
+
     e.target.number.value = "";
     e.target.description.value = "";
     e.target.owner.value = "";
+  };
 
-    console.log(inputs.category);
+  const handleImage = (e) => {
+    const file = e.target.files[0];
+    setImage((values) => ({ ...values, file: file, name: file.name }));
   };
 
   return (
@@ -73,6 +83,15 @@ const SendForm = () => {
           placeholder="Enter owner"
           value={inputs.owner || ""}
           onChange={handleChange}
+        />
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label>Upload image</Form.Label>
+        <Form.Control
+          onChange={handleImage}
+          type="file"
+          name="image"
+          accept="image/png, image/gif, image/jpeg"
         />
       </Form.Group>
       <Button variant="primary" type="submit">
