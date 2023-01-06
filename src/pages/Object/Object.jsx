@@ -22,30 +22,37 @@ const Object = () => {
         style={{
           display: "flex",
           paddingLeft: "12px",
-          paddingEight: "12px",
+          paddingRight: "12px",
           flexDirection: "column",
           alignItems: "stretch",
         }}
       >
-        <QRCode value={link} size={128} className="mb-3" />
-        <Image
-          style={{
-            height: "400px",
-            objectFit: "scale-down",
-            backgroundColor: "black",
-          }}
-          src={object.file_src}
-          alt="img"
-        />
-        <h3>ID</h3>
+        <div style={{ display: "flex", position: "relative", marginBottom: "1rem" }}>
+          <QRCode
+            value={link}
+            size={32}
+            style={{ position: "absolute", bottom: "0" }}
+          />
+          <Image
+            style={{
+              width: "100%",
+              height: "400px",
+              objectFit: "scale-down",
+              backgroundColor: "black",
+            }}
+            src={object.file_src}
+            alt="img"
+          />
+        </div>
+        <h4>ID</h4>
         <p>{object.id}</p>
-        <h3>Number:</h3>
+        <h4>Number:</h4>
         <p>{object.number}</p>
-        <h3>Category:</h3>
+        <h4>Category:</h4>
         <p>{object.category}</p>
-        <h3>Description:</h3>
+        <h4>Description:</h4>
         <p>{object.description}</p>
-        <h3>Owner:</h3>
+        <h4>Owner:</h4>
         <p>{object.owner}</p>
       </div>
     );
