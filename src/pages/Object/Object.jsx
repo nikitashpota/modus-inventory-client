@@ -37,7 +37,7 @@ const Object = () => {
             style={{
               width: "100%",
               height: "400px",
-              objectFit: "scale-down",
+              objectFit: "contain",
               backgroundColor: "black",
             }}
             src={object.file_src}

@@ -16,14 +16,16 @@ const CardObject = ({ props }) => {
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    setShow(true);
+  };
 
   const deleteObject = () => {
     Axios.delete(`${API_URL}/api/delete/${id}`);
   };
 
   return (
-    <Card style={{ width: "18rem" }}>
+    <Card style={{ width: "20rem" }}>
       <Card.Body>
         <Card.Img
           style={{ height: "200px", objectFit: "cover" }}

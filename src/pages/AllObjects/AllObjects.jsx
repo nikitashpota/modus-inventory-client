@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Axios from "axios";
 import "./style.css";
 import Form from "react-bootstrap/Form";
@@ -7,36 +7,36 @@ import { API_URL } from "../../config";
 import EmptyList from "../../components/EmptyList/EmptyList";
 
 const AllObjects = () => {
-  const [descriptionList, setDescriptionList] = useState([]);
+  const [objects, setObjects] = useState([{ id: 0 }]);
   const [selectFilter, setSelectFilter] = useState("Всё...");
+  const mountedRef = useRef(true);
 
   const handleChangeFilter = (e) => {
     const value = e.target.value;
     setSelectFilter(value);
-
-    console.log(value);
   };
 
   useEffect(() => {
-    Axios.get(`${API_URL}/api/get`).then((response) => {
-      setDescriptionList(response.data);
-    });
-  }, [descriptionList]);
+    
+    setInterval(() => {
+      Axios.get(`${API_URL}/api/get`).then((response) => {
+        setObjects(response.data);
+      });
+    }, 1000);
 
-  const resultAfterFilter = descriptionList
-    .filter((value) => value.category === selectFilter)
-    .map((value) => {
-      return <CardObject props={value} key={value.id} />;
-    });
+    return function cleanup() {
+      mountedRef.current = false;
+    };
+  }, [mountedRef]);
 
-  const resultWithoutFilter = descriptionList.map((value) => {
-    return <CardObject props={value} key={value.id} />;
-  });
+  const filterDescriptionList =
+    selectFilter === "Всё..."
+      ? objects
+      : objects.filter((value) => {
+          return value.category === selectFilter;
+        });
 
-  const result =
-    selectFilter !== "Всё..." ? resultAfterFilter : resultWithoutFilter;
-
-  if (descriptionList.length > 0) {
+  if (objects.length > 0) {
     return (
       <>
         <div style={{ paddingLeft: "12px", paddingRight: "12px" }}>
@@ -62,7 +62,9 @@ const AllObjects = () => {
             alignContent: "center",
           }}
         >
-          {result}
+          {filterDescriptionList.map((value) => {
+            return <CardObject props={value} key={value.id} />;
+          })}
         </div>
       </>
     );
