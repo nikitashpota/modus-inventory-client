@@ -25,7 +25,12 @@ const CardObject = ({ props }) => {
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Body>
-        <Card.Img className="mb-3" variant="top" src={file_src} />
+        <Card.Img
+          style={{ height: "200px", objectFit: "cover" }}
+          className="mb-3"
+          variant="top"
+          src={file_src}
+        />
         <Card.Text>{number}</Card.Text>
         <Card.Title>Category:</Card.Title>
         <Card.Text>{category}</Card.Text>

@@ -40,15 +40,17 @@ const AllObjects = () => {
     return (
       <>
         <div style={{ paddingLeft: "12px", paddingRight: "12px" }}>
-          <Form.Group>
-            <Form.Text>Categories:</Form.Text>
-            <Form.Select className="mb-3" onChange={handleChangeFilter}>
-              <option>Всё...</option>
-              <option>Компьютеры и оборудование</option>
-              <option>Мебель</option>
-              <option>Другое</option>
-            </Form.Select>
-          </Form.Group>
+          <Form>
+            <Form.Group>
+              <Form.Label>Categories:</Form.Label>
+              <Form.Select className="mb-3" onChange={handleChangeFilter}>
+                <option>Всё...</option>
+                <option>Компьютеры и оборудование</option>
+                <option>Мебель</option>
+                <option>Другое</option>
+              </Form.Select>
+            </Form.Group>
+          </Form>
         </div>
 
         <div

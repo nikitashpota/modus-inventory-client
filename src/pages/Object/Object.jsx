@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
 import QRCode from "react-qr-code";
+import Image from "react-bootstrap/Image";
 import { API_URL, CLIENT_URL } from "../../config";
 
 const Object = () => {
@@ -17,8 +18,25 @@ const Object = () => {
 
   if (object) {
     return (
-      <div  style={{ paddingLeft: "12px", paddingRight: "12px" }}>
-        <QRCode value={link} size={128} className="mb-3"/>
+      <div
+        style={{
+          display: "flex",
+          paddingLeft: "12px",
+          paddingEight: "12px",
+          flexDirection: "column",
+          alignItems: "stretch",
+        }}
+      >
+        <QRCode value={link} size={128} className="mb-3" />
+        <Image
+          style={{
+            height: "400px",
+            objectFit: "scale-down",
+            backgroundColor: "black",
+          }}
+          src={object.file_src}
+          alt="img"
+        />
         <h3>ID</h3>
         <p>{object.id}</p>
         <h3>Number:</h3>

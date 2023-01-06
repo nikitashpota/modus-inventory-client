@@ -18,8 +18,9 @@ const SendForm = () => {
     console.log({ [e.target.name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(inputs);
 
     const formData = new FormData();
     formData.append("image", image.file);
@@ -28,11 +29,12 @@ const SendForm = () => {
     formData.append("category", inputs.category);
     formData.append("number", inputs.number);
 
-    await Axios.post(`${API_URL}/api/insert`, formData);
+    Axios.post(`${API_URL}/api/insert`, formData);
 
     e.target.number.value = "";
     e.target.description.value = "";
     e.target.owner.value = "";
+    e.target.image.value = "";
   };
 
   const handleImage = (e) => {
