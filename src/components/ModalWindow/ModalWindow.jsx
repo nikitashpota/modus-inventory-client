@@ -44,6 +44,12 @@ const ModalWindow = ({ show, handleClose, props, setValues }) => {
     formData.append("category", inputs.category);
     formData.append("id", id);
 
+    await Axios({
+      method: "put",
+      url: `${API_URL}/api/update`,
+      data: formData,
+    });
+
     setValues({
       number: inputs.number,
       description: inputs.description,
@@ -51,12 +57,6 @@ const ModalWindow = ({ show, handleClose, props, setValues }) => {
       id: id,
       category: inputs.category,
       file_src: file_src,
-    });
-
-    await Axios({
-      method: "put",
-      url: `${API_URL}/api/update`,
-      data: formData,
     });
   };
 
