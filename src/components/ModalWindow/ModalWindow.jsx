@@ -5,12 +5,13 @@ import Button from "react-bootstrap/Button";
 import Axios from "axios";
 import { API_URL } from "../../config";
 
-const ModalWindow = ({ show, handleClose, props }) => {
+const ModalWindow = ({ show, handleClose, props, setValues }) => {
   const number = props.number;
   const description = props.description;
   const owner = props.owner;
   const id = props.id;
   const category = props.category;
+  const file_src = props.file_src;
 
   const [inputs, setInputs] = useState({
     number: number,
@@ -32,7 +33,7 @@ const ModalWindow = ({ show, handleClose, props }) => {
     setInputs((values) => ({ ...values, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -43,7 +44,20 @@ const ModalWindow = ({ show, handleClose, props }) => {
     formData.append("category", inputs.category);
     formData.append("id", id);
 
-    Axios.put(`${API_URL}/api/update`, formData);
+    setValues({
+      number: inputs.number,
+      description: inputs.description,
+      owner: inputs.owner,
+      id: id,
+      category: inputs.category,
+      file_src: file_src,
+    });
+
+    await Axios({
+      method: "put",
+      url: `${API_URL}/api/update`,
+      data: formData,
+    });
   };
 
   return (

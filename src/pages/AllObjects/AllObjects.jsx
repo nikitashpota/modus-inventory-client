@@ -9,25 +9,22 @@ import EmptyList from "../../components/EmptyList/EmptyList";
 const AllObjects = () => {
   const [objects, setObjects] = useState([{ id: 0 }]);
   const [selectFilter, setSelectFilter] = useState("Всё...");
-  const mountedRef = useRef(true);
+  const changeRef = useRef(true);
 
   const handleChangeFilter = (e) => {
     const value = e.target.value;
     setSelectFilter(value);
   };
 
-  useEffect(() => {
-    
-    setInterval(() => {
-      Axios.get(`${API_URL}/api/get`).then((response) => {
-        setObjects(response.data);
-      });
-    }, 1000);
+  const [change, setChange] = useState(false);
 
-    return function cleanup() {
-      mountedRef.current = false;
-    };
-  }, [mountedRef]);
+  useEffect(() => {
+    console.log("effect");
+    Axios.get(`${API_URL}/api/get`).then((response) => {
+      setObjects(response.data);
+    });
+    changeRef.current = change;
+  }, [change]);
 
   const filterDescriptionList =
     selectFilter === "Всё..."
@@ -63,7 +60,14 @@ const AllObjects = () => {
           }}
         >
           {filterDescriptionList.map((value) => {
-            return <CardObject props={value} key={value.id} />;
+            return (
+              <CardObject
+                props={value}
+                key={value.id}
+                setChangeProps={setChange}
+                changeRefProps={changeRef}
+              />
+            );
           })}
         </div>
       </>

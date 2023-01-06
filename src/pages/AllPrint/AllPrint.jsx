@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import CardPrint from "../../components/CardPrint/CardPrint";
 import { API_URL } from "../../config";
@@ -6,20 +6,14 @@ import EmptyList from "../../components/EmptyList/EmptyList";
 
 const AllPrint = () => {
   const [objects, setObjects] = useState([]);
-  const mountedRef = useRef(true);
 
   useEffect(() => {
     console.log("Effect");
-    setInterval(() => {
-      Axios.get(`${API_URL}/api/get`).then((response) => {
-        setObjects(response.data);
-      });
-    }, 1000);
 
-    return function cleanup() {
-      mountedRef.current = false;
-    };
-  }, [mountedRef]);
+    Axios.get(`${API_URL}/api/get`).then((response) => {
+      setObjects(response.data);
+    });
+  }, []);
 
   if (objects.length > 0) {
     return (
