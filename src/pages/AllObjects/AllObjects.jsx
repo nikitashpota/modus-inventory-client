@@ -8,29 +8,50 @@ import EmptyList from "../../components/EmptyList/EmptyList";
 
 const AllObjects = () => {
   const [objects, setObjects] = useState([{ id: 0 }]);
-  const [selectFilter, setSelectFilter] = useState("Всё...");
+  const [filterCategory, setFilterCategories] = useState("Всё...");
+  const [owners, setOwners] = useState(["Все владельцы"]);
+  const [filterOwner, setFilterOwner] = useState("Все владельцы");
   const changeRef = useRef(true);
 
-  const handleChangeFilter = (e) => {
+  const handleFilterCategoty = (e) => {
     const value = e.target.value;
-    setSelectFilter(value);
+    setFilterCategories(value);
+  };
+
+  const handleFilterOwner = (e) => {
+    const value = e.target.value;
+    setFilterOwner(value);
   };
 
   const [change, setChange] = useState(false);
 
   useEffect(() => {
-    console.log("effect");
     Axios.get(`${API_URL}/api/get`).then((response) => {
       setObjects(response.data);
+
+      const owns = new Set(response.data.map((value) => value.owner));
+      owns.forEach((owner) => {
+        if (!owners.includes(owner)) {
+          setOwners((prev) => [...prev, owner]);
+        }
+      });
     });
     changeRef.current = change;
+    // eslint-disable-next-line
   }, [change]);
 
-  const filterDescriptionList =
-    selectFilter === "Всё..."
+  let filterDescriptionList =
+    filterCategory === "Всё..."
       ? objects
       : objects.filter((value) => {
-          return value.category === selectFilter;
+          return value.category === filterCategory;
+        });
+
+  filterDescriptionList =
+    filterOwner === "Все владельцы"
+      ? filterDescriptionList
+      : filterDescriptionList.filter((value) => {
+          return value.owner === filterOwner;
         });
 
   if (objects.length > 0) {
@@ -38,13 +59,21 @@ const AllObjects = () => {
       <>
         <div style={{ paddingLeft: "12px", paddingRight: "12px" }}>
           <Form>
-            <Form.Group>
+            <Form.Group className="mb-3">
               <Form.Label>Categories:</Form.Label>
-              <Form.Select className="mb-3" onChange={handleChangeFilter}>
+              <Form.Select onChange={handleFilterCategoty}>
                 <option>Всё...</option>
                 <option>Компьютеры и оборудование</option>
                 <option>Мебель</option>
                 <option>Другое</option>
+              </Form.Select>
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Owners:</Form.Label>
+              <Form.Select onChange={handleFilterOwner}>
+                {owners.map((owner) => {
+                  return <option key={owner}>{owner}</option>;
+                })}
               </Form.Select>
             </Form.Group>
           </Form>
