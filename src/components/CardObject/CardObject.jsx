@@ -54,7 +54,6 @@ const CardObject = ({ props, setChangeProps, changeRefProps }) => {
               display: "flex",
               flexDirection: "row",
               justifyContent: "space-between",
-              marginBottom: "1rem",
             }}
           >
             <Button
