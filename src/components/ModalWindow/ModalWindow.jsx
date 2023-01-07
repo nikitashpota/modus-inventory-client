@@ -11,7 +11,7 @@ const ModalWindow = ({ show, handleClose, props, setValues }) => {
   const owner = props.owner;
   const id = props.id;
   const category = props.category;
-  const file_src = props.file_src;
+  //const file_src = props.file_src;
 
   const [inputs, setInputs] = useState({
     number: number,
@@ -24,7 +24,11 @@ const ModalWindow = ({ show, handleClose, props, setValues }) => {
 
   const handleImage = (e) => {
     const file = e.target.files[0];
-    setImage((values) => ({ ...values, file: file, name: file.name }));
+    const newFile = new File(
+      [file],
+      `image-${Date.now()}.${file.name.split(".").pop()}`
+    );
+    setImage((values) => ({ ...values, file: newFile, name: newFile.name }));
   };
 
   const handleChange = (e) => {
@@ -33,7 +37,7 @@ const ModalWindow = ({ show, handleClose, props, setValues }) => {
     setInputs((values) => ({ ...values, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -44,20 +48,22 @@ const ModalWindow = ({ show, handleClose, props, setValues }) => {
     formData.append("category", inputs.category);
     formData.append("id", id);
 
-    await Axios({
+    Axios({
       method: "put",
       url: `${API_URL}/api/update`,
       data: formData,
+    }).then((res) => {
+      setValues({
+        number: inputs.number,
+        description: inputs.description,
+        owner: inputs.owner,
+        id: id,
+        category: inputs.category,
+        file_src: res.data,
+      });
     });
 
-    setValues({
-      number: inputs.number,
-      description: inputs.description,
-      owner: inputs.owner,
-      id: id,
-      category: inputs.category,
-      file_src: file_src,
-    });
+
   };
 
   return (
