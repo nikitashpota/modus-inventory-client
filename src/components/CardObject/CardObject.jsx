@@ -6,18 +6,15 @@ import ModalWindow from "../ModalWindow/ModalWindow";
 import { API_URL, CLIENT_URL } from "../../config";
 
 const CardObject = ({ props, setChangeProps, changeRefProps }) => {
-
   const setChange = setChangeProps;
   const changeRef = changeRefProps;
 
-  const [values, setValues] = useState({
-    number: props.number,
-    description: props.description,
-    owner: props.owner,
-    id: props.id,
-    category: props.category,
-    file_src: props.file_src,
-  });
+  const number = props.number;
+  const description = props.description;
+  const owner = props.owner;
+  const id = props.id;
+  const category = props.category;
+  const file_src = props.file_src;
 
   const [show, setShow] = useState(false);
   const handleClose = () => {
@@ -28,7 +25,7 @@ const CardObject = ({ props, setChangeProps, changeRefProps }) => {
   };
 
   const deleteObject = () => {
-    Axios.delete(`${API_URL}/api/delete/${values.id}`).then(() => {
+    Axios.delete(`${API_URL}/api/delete/${id}`).then(() => {
       setChange(!changeRef.current);
     });
   };
@@ -41,15 +38,15 @@ const CardObject = ({ props, setChangeProps, changeRefProps }) => {
             style={{ height: "200px", objectFit: "cover" }}
             className="mb-3"
             variant="top"
-            src={values.file_src}
+            src={file_src}
           />
-          <Card.Text>{values.number}</Card.Text>
+          <Card.Text>{number}</Card.Text>
           <Card.Title>Category:</Card.Title>
-          <Card.Text>{values.category}</Card.Text>
+          <Card.Text>{category}</Card.Text>
           <Card.Title>Description:</Card.Title>
-          <Card.Text>{values.description}</Card.Text>
+          <Card.Text>{description}</Card.Text>
           <Card.Title>Owner:</Card.Title>
-          <Card.Text>{values.owner}</Card.Text>
+          <Card.Text>{owner}</Card.Text>
           <div
             style={{
               display: "flex",
@@ -65,14 +62,17 @@ const CardObject = ({ props, setChangeProps, changeRefProps }) => {
               Edit
             </Button>
           </div>
-          <Card.Link href={`${CLIENT_URL}/print/${values.id}`}>Go to link</Card.Link>
+          <Card.Link href={`${CLIENT_URL}/print/${id}`}>
+            Go to link
+          </Card.Link>
         </Card.Body>
       </Card>
       <ModalWindow
         show={show}
         handleClose={handleClose}
         props={props}
-        setValues = {setValues}
+        setChangeProps={setChange}
+        changeRefProps={changeRef}
       />
     </>
   );
