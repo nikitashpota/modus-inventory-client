@@ -19,7 +19,10 @@ const CardPrint = ({ props }) => {
         }}
       >
         <QRCode value={link} size={126} style={{ marginBottom: "1rem" }} />
-        <Card.Title style={{ textAlign: "center" }}>{number}</Card.Title>
+
+        <Card.Link href={`${CLIENT_URL}/print/${id}`}>
+          <Card.Title style={{ textAlign: "center" }}>{number}</Card.Title>
+        </Card.Link>
       </Card.Body>
     </Card>
   );

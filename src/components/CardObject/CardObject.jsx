@@ -40,7 +40,9 @@ const CardObject = ({ props, setChangeProps, changeRefProps }) => {
             variant="top"
             src={file_src}
           />
-          <Card.Text>{number}</Card.Text>
+          <Card.Link  href={`${CLIENT_URL}/print/${id}`}>
+            <Card.Title className="mb-3">{number}</Card.Title>
+          </Card.Link>
           <Card.Title>Category:</Card.Title>
           <Card.Text>{category}</Card.Text>
           <Card.Title>Description:</Card.Title>
@@ -55,16 +57,21 @@ const CardObject = ({ props, setChangeProps, changeRefProps }) => {
               marginBottom: "1rem",
             }}
           >
-            <Button onClick={deleteObject} style={{ width: "100px" }}>
+            <Button
+              variant="danger"
+              onClick={deleteObject}
+              style={{ width: "100px" }}
+            >
               Delete
             </Button>
-            <Button onClick={handleShow} style={{ width: "100px" }}>
+            <Button
+              variant="primary"
+              onClick={handleShow}
+              style={{ width: "100px" }}
+            >
               Edit
             </Button>
           </div>
-          <Card.Link href={`${CLIENT_URL}/print/${id}`}>
-            Go to link
-          </Card.Link>
         </Card.Body>
       </Card>
       <ModalWindow
