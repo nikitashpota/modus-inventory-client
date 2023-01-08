@@ -8,7 +8,7 @@ import EmptyList from "../../components/EmptyList/EmptyList";
 
 const AllObjects = () => {
   const [objects, setObjects] = useState([{ id: 0 }]);
-  const [filterCategory, setFilterCategories] = useState("Всё...");
+  const [filterCategory, setFilterCategories] = useState("Все категории");
   const [owners, setOwners] = useState(["Все владельцы"]);
   const [filterOwner, setFilterOwner] = useState("Все владельцы");
   const changeRef = useRef(true);
@@ -41,7 +41,7 @@ const AllObjects = () => {
   }, [change]);
 
   let filterDescriptionList =
-    filterCategory === "Всё..."
+    filterCategory === "Все категории"
       ? objects
       : objects.filter((value) => {
           return value.category === filterCategory;
@@ -57,28 +57,23 @@ const AllObjects = () => {
   if (objects.length > 0) {
     return (
       <>
-        <div style={{ paddingLeft: "12px", paddingRight: "12px" }}>
-          <Form>
-            <Form.Group className="mb-3">
-              <Form.Label>Categories:</Form.Label>
-              <Form.Select onChange={handleFilterCategoty}>
-                <option>Всё...</option>
-                <option>Компьютеры и оборудование</option>
-                <option>Мебель</option>
-                <option>Другое</option>
-              </Form.Select>
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Owners:</Form.Label>
-              <Form.Select onChange={handleFilterOwner}>
-                {owners.map((owner) => {
-                  return <option key={owner}>{owner}</option>;
-                })}
-              </Form.Select>
-            </Form.Group>
-          </Form>
-        </div>
+        <div className="filters">
+          <select
+            className="filters__input"
+            onChange={handleFilterCategoty}
+          >
+            <option>Все категории</option>
+            <option>Компьютеры и оборудование</option>
+            <option>Мебель</option>
+            <option>Другое</option>
+          </select>
 
+          <select className="filters__input" onChange={handleFilterOwner}>
+            {owners.map((owner) => {
+              return <option key={owner}>{owner}</option>;
+            })}
+          </select>
+        </div>
         <div
           style={{
             display: "flex",
