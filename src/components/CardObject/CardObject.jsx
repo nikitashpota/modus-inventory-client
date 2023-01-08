@@ -3,7 +3,10 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Axios from "axios";
 import ModalWindow from "../ModalWindow/ModalWindow";
+
 import { API_URL, CLIENT_URL } from "../../config";
+
+import "./style.css";
 
 const CardObject = ({ props, setChangeProps, changeRefProps }) => {
   const setChange = setChangeProps;
@@ -32,7 +35,7 @@ const CardObject = ({ props, setChangeProps, changeRefProps }) => {
 
   return (
     <>
-      <Card style={{ width: "20rem" }}>
+      <Card className="cardM">
         <Card.Body>
           <Card.Img
             style={{ height: "200px", objectFit: "cover" }}
@@ -40,7 +43,7 @@ const CardObject = ({ props, setChangeProps, changeRefProps }) => {
             variant="top"
             src={file_src}
           />
-          <Card.Link  href={`${CLIENT_URL}/print/${id}`}>
+          <Card.Link href={`${CLIENT_URL}/print/${id}`}>
             <Card.Title className="mb-3">{number}</Card.Title>
           </Card.Link>
           <Card.Title>Category:</Card.Title>

@@ -17,14 +17,21 @@
   border: 1px solid rgba(0, 0, 0, 0.175);
 }
 
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  place-content: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
 @media (max-width: 480px) {
   .filters {
     flex-direction: column;
-    
   }
 
   .filters__input {
     width: 100%;
   }
-
 }

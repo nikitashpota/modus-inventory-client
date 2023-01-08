@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Axios from "axios";
 import "./style.css";
-import Form from "react-bootstrap/Form";
 import CardObject from "../../components/CardObject/CardObject";
 import { API_URL } from "../../config";
 import EmptyList from "../../components/EmptyList/EmptyList";
@@ -58,10 +57,7 @@ const AllObjects = () => {
     return (
       <>
         <div className="filters">
-          <select
-            className="filters__input"
-            onChange={handleFilterCategoty}
-          >
+          <select className="filters__input" onChange={handleFilterCategoty}>
             <option>Все категории</option>
             <option>Компьютеры и оборудование</option>
             <option>Мебель</option>
@@ -74,15 +70,7 @@ const AllObjects = () => {
             })}
           </select>
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "1rem",
-            justifyContent: "center",
-            alignContent: "center",
-          }}
-        >
+        <div className="cards">
           {filterDescriptionList.map((value) => {
             return (
               <CardObject
