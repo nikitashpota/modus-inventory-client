@@ -39,58 +39,61 @@ const AllObjects = () => {
     // eslint-disable-next-line
   }, [change]);
 
-  let filterDescriptionList =
+  let filterObjects =
     filterCategory === "Все категории"
       ? objects
       : objects.filter((value) => {
           return value.category === filterCategory;
         });
 
-  filterDescriptionList =
+  filterObjects =
     filterOwner === "Все владельцы"
-      ? filterDescriptionList
-      : filterDescriptionList.filter((value) => {
+      ? filterObjects
+      : filterObjects.filter((value) => {
           return value.owner === filterOwner;
         });
 
-  if (objects.length > 0) {
-    return (
-      <>
-        <div className="filters">
-          <select className="filters__input" onChange={handleFilterCategoty}>
-            <option>Все категории</option>
-            <option>Компьютеры и оборудование</option>
-            <option>Мебель</option>
-            <option>Другое</option>
-          </select>
+  const all = (
+    <div className="cards">
+      {filterObjects.map((value) => {
+        return (
+          <CardObject
+            props={value}
+            key={value.id}
+            setChangeProps={setChange}
+            changeRefProps={changeRef}
+          />
+        );
+      })}
+    </div>
+  );
 
-          <select className="filters__input" onChange={handleFilterOwner}>
-            {owners.map((owner) => {
-              return <option key={owner}>{owner}</option>;
-            })}
-          </select>
-        </div>
-        <div className="cards">
-          {filterDescriptionList.map((value) => {
-            return (
-              <CardObject
-                props={value}
-                key={value.id}
-                setChangeProps={setChange}
-                changeRefProps={changeRef}
-              />
-            );
+  const empty = (
+    <>
+      <EmptyList />
+    </>
+  );
+
+  return (
+    <>
+      <div className="filters">
+        <h1 className="filters__name">FILTERS</h1>
+        <select className="filters__input" onChange={handleFilterCategoty}>
+          <option>Все категории</option>
+          <option>Компьютеры и оборудование</option>
+          <option>Мебель</option>
+          <option>Другое</option>
+        </select>
+
+        <select className="filters__input" onChange={handleFilterOwner}>
+          {owners.map((owner) => {
+            return <option key={owner}>{owner}</option>;
           })}
-        </div>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <EmptyList />
-      </>
-    );
-  }
+        </select>
+      </div>
+      {filterObjects.length > 0 ? all : empty}
+    </>
+  );
 };
 
 export default AllObjects;

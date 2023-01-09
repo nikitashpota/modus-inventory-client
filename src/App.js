@@ -20,9 +20,9 @@ function App() {
           <Container>
             <Navbar.Brand href="/">MODUS</Navbar.Brand>
             <Nav className="me-auto">
-              <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/add">Add</Nav.Link>
-              <Nav.Link href="/print">Print</Nav.Link>
+              <Nav.Link href="/">Objects</Nav.Link>
+              <Nav.Link href="/add">Add object</Nav.Link>
+              <Nav.Link href="/print">Print QR</Nav.Link>
             </Nav>
           </Container>
         </Navbar>
