@@ -12,7 +12,7 @@ const CardPrint = ({ props }) => {
 
   const handlePrint = () => {
     const svg = document.querySelector("svg");
-    saveSvgAsPng(svg, `QR-${number}.png`, { scale: 5 });
+    saveSvgAsPng(svg, `QR_${props.number}-${props.category}.png`, { scale: 1 });
   };
 
   return (
