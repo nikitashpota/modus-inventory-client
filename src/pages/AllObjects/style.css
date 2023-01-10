@@ -47,7 +47,7 @@
     width: 100%;
   }
 
-  filters__name {
+  .filters__name {
     display: none;
   }
 }
