@@ -50,11 +50,7 @@ const SendForm = () => {
 
   const handleImage = (e) => {
     const file = e.target.files[0];
-    const newFile = new File(
-      [file],
-      `image-${Date.now()}.${file.name.split(".").pop()}`
-    );
-    setImage((values) => ({ ...values, file: newFile, name: newFile.name }));
+    setImage((values) => ({ ...values, file: file, name: file.name }));
   };
 
   return (
