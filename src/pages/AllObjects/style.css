@@ -15,9 +15,9 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  line-height:55% ;
+  line-height: 60%;
   color: white;
-  font-size: 50px;
+  font-size: 70px;
   z-index: 0;
 }
 
@@ -45,5 +45,9 @@
 
   .filters__input {
     width: 100%;
+  }
+
+  filters__name {
+    display: none;
   }
 }
