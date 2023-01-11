@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import Axios from "axios";
+
 import ModalWindow from "../ModalWindow/ModalWindow";
 
-import { API_URL, CLIENT_URL } from "../../config";
+
+import { CLIENT_URL } from "../../config";
 
 import "./style.css";
+import DeleteWarning from "../DeleteWarning/DeleteWarning";
 
 const CardObject = ({ props, setChangeProps, changeRefProps }) => {
   const setChange = setChangeProps;
@@ -20,6 +22,8 @@ const CardObject = ({ props, setChangeProps, changeRefProps }) => {
   const file_src = props.file_src;
 
   const [show, setShow] = useState(false);
+  const [showWarning, setShowWarning] = useState(false);
+
   const handleClose = () => {
     setShow(false);
   };
@@ -27,14 +31,15 @@ const CardObject = ({ props, setChangeProps, changeRefProps }) => {
     setShow(true);
   };
 
-  const deleteObject = () => {
-    Axios.delete(`${API_URL}/api/delete/${id}`).then(() => {
-      setChange(!changeRef.current);
-    });
-  };
+  const handleShowWarning = () => setShowWarning(true);
 
   return (
     <>
+    <DeleteWarning setShow ={setShowWarning}
+    id = {id}
+    changeRef = {changeRef}
+    setChange = {setChange}
+    show = {showWarning}/>
       <Card className="cardM">
         <Card.Body>
           <Card.Img
@@ -61,7 +66,7 @@ const CardObject = ({ props, setChangeProps, changeRefProps }) => {
           >
             <Button
               variant="danger"
-              onClick={deleteObject}
+              onClick={handleShowWarning}
               style={{ width: "100px" }}
             >
               Delete
