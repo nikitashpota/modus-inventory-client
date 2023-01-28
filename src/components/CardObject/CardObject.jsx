@@ -19,7 +19,7 @@ const CardObject = ({ props, setChangeProps, changeRefProps }) => {
   const owner = props.owner;
   const id = props.id;
   const category = props.category;
-  const file_src = props.file_src;
+  // const file_src = props.file_src;
 
   const [show, setShow] = useState(false);
   const [showWarning, setShowWarning] = useState(false);
@@ -42,12 +42,13 @@ const CardObject = ({ props, setChangeProps, changeRefProps }) => {
     show = {showWarning}/>
       <Card className="cardM">
         <Card.Body>
-          <Card.Img
-            style={{ height: "200px", objectFit: "cover" }}
+          {/* <Card.Img
+            style={{ height: "100px",width: "100px", objectFit: "cover" }}
             className="mb-3"
             variant="top"
             src={file_src}
-          />
+            loading="lazy"
+          /> */}
           <Card.Link href={`${CLIENT_URL}/print/${id}`}>
             <Card.Title className="mb-3">{number}</Card.Title>
           </Card.Link>

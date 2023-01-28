@@ -86,9 +86,18 @@ const AllObjects = () => {
         </select>
 
         <select className="filters__input" onChange={handleFilterOwner}>
-          {owners.map((owner) => {
-            return <option key={owner}>{owner}</option>;
-          })}
+          {owners
+            .sort((a, b) => {
+              if (a !== "Все владельцы" && b !== "Все владельцы") {
+                if (a < b) return -1;
+                if (a > b) return 1;
+                return 0;
+              }
+              return 0;
+            })
+            .map((owner) => {
+              return <option key={owner}>{owner}</option>;
+            })}
         </select>
       </div>
       {filterObjects.length > 0 ? all : empty}

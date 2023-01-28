@@ -40,8 +40,8 @@ function App() {
           </Routes>
         </Router>
       </div>
-      <footer className="bg-light text-center text-lg-start footer">
-        <div className="text-center p-3" style={{}}>
+      <footer className="bg-dark text-center text-lg-start footer">
+        <div className="text-center p-3 " style={{color: "GrayText", userSelect: "none"}}>
           ООО "Модус" © 2023
         </div>
       </footer>
