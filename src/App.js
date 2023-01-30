@@ -14,35 +14,44 @@ import AllPrint from "./pages/AllPrint/AllPrint";
 
 function App() {
   return (
-    <>
-      <div className="app">
-        <Router className="wrapper">
-          <Navbar bg="dark" variant="dark" style={{ marginBottom: "1rem" }}>
-            <Container>
-              <Navbar.Brand href="/">MODUS</Navbar.Brand>
-              <Nav className="me-auto">
-                <Nav.Link href="/">Objects</Nav.Link>
-                <Nav.Link href="/add">Add object</Nav.Link>
-                <Nav.Link href="/print">Print QR</Nav.Link>
-              </Nav>
-            </Container>
-          </Navbar>
-          <div>
-            <Routes>
-              <Route exact path="/" element={<AllObjects />} />
-              <Route path="/add" element={<DataEntry />} />
-              <Route path="/print" element={<AllPrint />} />
-              <Route path="/print/:id" element={<Object />} />
-            </Routes>
-          </div>
+    <div className="wrapper">
+      <Navbar
+        bg="dark"
+        variant="dark"
+        style={{ marginBottom: "1rem" }}
+        className="header"
+      >
+        <Container>
+          <Navbar.Brand href="/">MODUS</Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link href="/">Objects</Nav.Link>
+            <Nav.Link href="/add">Add object</Nav.Link>
+            <Nav.Link href="/print">Print QR</Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
+      <div className="main">
+        <Router>
+          <Routes>
+            <Route exact path="/" element={<AllObjects />} />
+            <Route path="/add" element={<DataEntry />} />
+            <Route path="/print" element={<AllPrint />} />
+            <Route path="/print/:id" element={<Object />} />
+          </Routes>
         </Router>
       </div>
+<<<<<<< HEAD
       <footer className="bg-light text-center text-lg-start">
         <div className="text-center p-3" style={{}}>
           OOO "Модус"© 2023
+=======
+      <footer className="bg-dark text-center text-lg-start footer">
+        <div className="text-center p-3 " style={{color: "GrayText", userSelect: "none"}}>
+          ООО "Модус" © 2023
+>>>>>>> main
         </div>
       </footer>
-    </>
+    </div>
   );
 }
 

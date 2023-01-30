@@ -1,21 +1,10 @@
-.App {
-  text-align: center;
-}
-
-.form {
+.wrapper {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
-.form input {
-  width: 350px;
-  height: 30px;
-  margin: 10px;
-}
-
-.contaner{
-  margin: 0 auto;
-  margin-bottom: 2rem;;
+.main {
+  flex: 1 1 auto;
+  margin-bottom: 1rem;
 }
