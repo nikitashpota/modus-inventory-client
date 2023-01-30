@@ -40,15 +40,9 @@ function App() {
           </Routes>
         </Router>
       </div>
-<<<<<<< HEAD
-      <footer className="bg-light text-center text-lg-start">
-        <div className="text-center p-3" style={{}}>
-          OOO "Модус"© 2023
-=======
       <footer className="bg-dark text-center text-lg-start footer">
         <div className="text-center p-3 " style={{color: "GrayText", userSelect: "none"}}>
           ООО "Модус" © 2023
->>>>>>> main
         </div>
       </footer>
     </div>
