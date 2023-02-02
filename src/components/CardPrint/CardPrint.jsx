@@ -11,7 +11,7 @@ const CardPrint = ({ props }) => {
   const link = `${CLIENT_URL}/print/${id}`;
 
   const handlePrint = () => {
-    const svg = document.querySelector("svg");
+    const svg = document.getElementById(`svg${id}`);
     saveSvgAsPng(svg, `QR_${props.number}-${props.category}.png`, { scale: 1 });
   };
 
@@ -33,7 +33,7 @@ const CardPrint = ({ props }) => {
             <Card.Title style={{ textAlign: "center" }}>{number}</Card.Title>
           </Card.Link>
           <QRCode
-            name="svg"
+            id = {`svg${id}`}
             value={link}
             size={126}
             style={{ marginBottom: "1rem" }}
